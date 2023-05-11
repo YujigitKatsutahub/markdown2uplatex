@@ -6,7 +6,7 @@ texlive texlive-lang-japanese texlive-latex-extra nkf make
 
 plantuml と 
 markdownファイル から LaTeXファイル を作成する pandoc のインストール  
-plantuml pandoc
+plantuml pandoc latexmk
 
 bin ディレクトリーを ~/bin にコピーし、  
 texmf ディレクトリを ~/temmf にコピーした後、  
@@ -19,7 +19,7 @@ ubuntu22.04ja のインストール直後の場合の手順を以下に示す
 sudo apt update  
 sudo apt -y upgrade  
 sudo apt -y install texlive texlive-lang-japanese texlive-latex-extra nkf make  
-sudo apt -y install plantuml pandoc  
+sudo apt -y install plantuml pandoc latexmk  
 rsync -av bin/ ~/bin/  
 rsync -av texmf/ ~/texmf/  
 rsync -av .latexmk ~/.  

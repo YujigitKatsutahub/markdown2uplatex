@@ -22,6 +22,7 @@ sudo apt -y install texlive texlive-lang-japanese texlive-latex-extra nkf make
 sudo apt -y install plantuml pandoc  
 rsync -av bin/ ~/bin/  
 rsync -av texmf/ ~/texmf/  
+rsync -av .latexmk ~/.  
 
 logout後、loginし、  
 端末を開き、  

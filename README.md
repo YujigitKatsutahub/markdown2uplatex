@@ -8,8 +8,8 @@ plantuml と
 markdownファイル から LaTeXファイル を作成する pandoc のインストール  
 plantuml pandoc
 
-bin ディレクトリーを ~/binにコピーし、  
-texmf ディレクトリごとホームにコピーした後、  
+bin ディレクトリーを ~/bin にコピーし、  
+texmf ディレクトリを ~/temmf にコピーした後、  
 make で umd.pdf ができる
 
 ubuntu22.04ja のインストール直後の場合の手順を以下に示す
@@ -21,6 +21,7 @@ sudo apt -y upgrade
 sudo apt -y install texlive texlive-lang-japanese texlive-latex-extra nkf make  
 sudo apt -y plantuml pandoc  
 rsync -av bin/ ~/bin/  
+rsync -av texmf/ ~/texmf/  
 
 logout後、loginし、  
 端末を開き、  

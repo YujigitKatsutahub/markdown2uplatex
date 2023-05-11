@@ -23,24 +23,26 @@ sudo apt -y plantuml pandoc
 rsync -av bin/ ~/bin/  
 
 logout後、loginし、  
-端末を開き、make で umd.pdf ができる
+端末を開き、  
+make で umd.pdf ができる
 
+---
 報告書のサンプルを追加
 
-data/sample.ods をダブルクリック
-表を範囲指定し、
-TAB(ファイル)からエクスポートをクリック
-選択範囲をチェック
-ファイル形式pngを選択
-ファイル名を data で保存
-グラフをクリックした後、右クリック
-画像としてエクスポート
-保存ディレクトリをodsファイルのディレクトリに変更し、
+data/sample.ods をダブルクリック  
+表を範囲指定し、  
+TAB(ファイル)からエクスポートをクリック  
+選択範囲をチェック  
+ファイル形式pngを選択  
+ファイル名を data で保存  
+グラフをクリックした後、右クリック  
+画像としてエクスポート  
+保存ディレクトリをodsファイルのディレクトリに変更し、  
 ファイル名 graph.png で保存
 
-data/mode4.ods をダブルクリック
-表を範囲指定し、mode4.png で保存
-点滅周期のグラフを mode4graph.png で保存
-周期の誤差のグラフを mode4gosa.png で保存
+data/mode4.ods をダブルクリック  
+表を範囲指定し、mode4.png で保存  
+点滅周期のグラフを mode4graph.png で保存  
+周期の誤差のグラフを mode4gosa.png で保存  
 
 make -f report.mk で report.pdf ができる

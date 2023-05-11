@@ -1,0 +1,113 @@
+#!/bin/sh
+#
+# umd2tex 2023.04.25 edit  by yuji katsuta
+#
+
+if [ "$1" = "" ]
+then
+echo "usage : make from markdown to upLaTeX"
+echo "$0 filename : filename.md to filename.tex"
+echo "$0 ptex filename : to pLaTeX"
+echo "$0 -makemain filename : to md2texmain.tex & filename.tex"
+echo "$0 -makemain ptex filename : to 2files(pLaTeX)"
+else
+if [ "$1" = "-makemain" ]
+then
+MDMAIN=umd2texmain
+shift
+else
+if [ "$2" = "" ];
+then
+MDMAIN=$1		
+else
+MDMAIN=$2		
+fi
+fi
+echo '% -*- coding:utf-8 -*-' > $MDMAIN.tex
+if [ "$2" = "" ];
+then
+echo  '\documentclass[a4paper,dvipdfmx]{ujarticle}%' >> $MDMAIN.tex
+else
+shift
+echo  '\documentclass[a4paper,dvipdfmx]{jarticle}%' >> $MDMAIN.tex
+fi
+echo '\usepackage{ulem,longtable,booktabs}' >> $MDMAIN.tex
+echo '\usepackage{graphicx}' >> $MDMAIN.tex
+echo '\usepackage{hyperref}' >> $MDMAIN.tex
+echo '\usepackage{pxjahyper}' >> $MDMAIN.tex
+echo '\usepackage{pdfpages}' >> $MDMAIN.tex
+echo '\usepackage{moreverb}' >> $MDMAIN.tex
+echo '\usepackage{etoolbox}' >> $MDMAIN.tex
+echo '%' >> $MDMAIN.tex
+echo '\providecommand{\\tightlist}{%' >> $MDMAIN.tex
+echo '  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}' >> $MDMAIN.tex
+echo '%' >> $MDMAIN.tex
+echo '\\newcommand{\defset}[1]{\\csdef{set#1}{\\csdef{#1}}}'>> $MDMAIN.tex
+echo '\defset{pdfs}\defset{pdfn}\defset{pdfm}\defset{hyocap}'>> $MDMAIN.tex
+echo '\setpdfs{1}\setpdfn{1}\setpdfm{0}\sethyocap{}'>> $MDMAIN.tex
+echo '\def\\pdfone{1}'>> $MDMAIN.tex
+echo '\defset{pdfsize}\defset{pngsize}\defset{fgsize}'>> $MDMAIN.tex
+echo '\defset{minipagesize}'>> $MDMAIN.tex
+echo '\setpdfsize{0.8}\setpngsize{1.0}\setfgsize{1.0}'>> $MDMAIN.tex
+echo '\setminipagesize{1.0}'>> $MDMAIN.tex
+echo '\long\def\pngtohyo#1{'>> $MDMAIN.tex
+echo '\\begin{table}[ht]'>> $MDMAIN.tex
+echo '\\caption{\hyocap}'>> $MDMAIN.tex
+echo '\label{hyo:\hyocap}'>> $MDMAIN.tex
+echo '\\centering'>> $MDMAIN.tex
+echo '\\begin{minipage}{\\fgsize\\textwidth}'>> $MDMAIN.tex
+echo '\includegraphics[width=\\fgsize\\textwidth]{#1}'>> $MDMAIN.tex
+echo '\\end{minipage}'>> $MDMAIN.tex
+echo '\\end{table}'>> $MDMAIN.tex
+echo '\sethyocap{}'>> $MDMAIN.tex
+echo '}'>> $MDMAIN.tex
+echo '\long\def\minipdf#1{'>> $MDMAIN.tex
+echo ' \ifx \pdfs \pdfone \\else \setpdfm{1} \\fi'>> $MDMAIN.tex
+echo ' \ifx \pdfn \pdfone \\else \setpdfm{1} \\fi'>> $MDMAIN.tex
+echo ' \ifx \pdfm \pdfone'>> $MDMAIN.tex
+echo '  \\begin{minipage}{\minipagesize\\textwidth}'>> $MDMAIN.tex
+echo '   \includepdf[pages=\pdfs,scale=\pdfsize,pagecommand={}]{#1}'>> $MDMAIN.tex
+echo '  \\end{minipage}'>> $MDMAIN.tex
+echo '  \ifx \pdfn \pdfs \setpdfn{1} \\fi'>> $MDMAIN.tex
+echo '  \ifx \pdfn \pdfone \\else'>> $MDMAIN.tex
+echo '   \includepdf[pages=\pdfn-,scale=\pdfsize,pagecommand={}]{#1}'>> $MDMAIN.tex
+echo '  \\fi'>> $MDMAIN.tex
+echo '  \setpdfs{1}\setpdfn{1}\setpdfm{0}'>> $MDMAIN.tex
+echo ' \\else'>> $MDMAIN.tex
+echo '  \includepdf[pages=1-,scale=\pdfsize,pagecommand={}]{#1}'>> $MDMAIN.tex
+echo ' \\fi'>> $MDMAIN.tex
+echo '}'>> $MDMAIN.tex
+echo '\\newlength{\orgindent}'>> $MDMAIN.tex
+echo '\orgindent=\\parindent'>> $MDMAIN.tex
+echo '\def\setindent#1{\\parindent=#1}'>> $MDMAIN.tex
+echo '\def\\resetindent{\\parindent=\orgindent}'>> $MDMAIN.tex
+echo '\def\zeroindent{\\parindent=0pt}'>> $MDMAIN.tex
+echo '%'>> $MDMAIN.tex
+echo '%'>> $MDMAIN.tex
+echo '\\begin{document}' >> $MDMAIN.tex
+if [ "$MDMAIN" = "umd2texmain" ]
+then
+echo '%%%%% made by umd2tex' > $1.tex
+fi
+cat $1.md \
+| sed -e 's/<div.*div>/\\clearpage/g' \
+-e 's/@import "\(.*\).png"/\\pngtohyo{\1.png}/g' \
+-e 's/@import "\(.*\).pdf"/\\minipdf{\1.pdf}/g' \
+-e 's/@import "\(.*\).c"/\\listinginput{\\pdfn}{\1.c}/g' \
+-e 's/@import "\(.*\).h"/\\listinginput{\\pdfn}{\1.h}/g' \
+-e 's/@import "\(.*\).txt"/\\verbatimtabinput[\\pdfn]{\1.txt}/g' \
+-e 's/!include \(.*\).pu/![\1](\1.png)/g' \
+-e 's/<!-- *LaTeX *\\\(.*\) -->/\\LaTeXbs\1/g' \
+-e 's/```.*//g'| pandoc -t latex \
+| sed -e 's/begin{figure}/begin{figure}[ht]/g' \
+-e 's/\\LaTeXbs/\\/g' \
+-e 's/\includegraphics/\includegraphics[width=\\fgsize\\textwidth]/g' \
+-e 's/\\caption{\(.*\)}/\\caption{\1}\\label{zu:\1}/g' \
+>> $1.tex
+echo '%' >> $1.tex
+if [ "$MDMAIN" = "umd2texmain" ]
+then
+echo "\\input{$1.tex}" >> $MDMAIN.tex
+fi
+echo '\\end{document}' >> $MDMAIN.tex
+fi

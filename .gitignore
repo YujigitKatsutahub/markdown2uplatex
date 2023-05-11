@@ -16,3 +16,4 @@
 *.bbl
 *.aux
 *.tex
+!bin/*.tex

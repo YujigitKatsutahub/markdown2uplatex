@@ -1,8 +1,8 @@
-<!-- 2023.04.29 edit  by yuji katsuta -->
+<!-- 2023.06.25 edit  by yuji katsuta -->
 <!-- LaTeX \begin{flushright} -->
 <!-- comment スペース２個で改行 -->
-(Ver.0.0.3)  
-作成日2023年4月29日  
+(Ver.0.0.4)  
+作成日2023年6月25日  
 **髙﨑高崎**　太郎  
 <!-- comment 髙﨑 is UTF8 -->
 <!-- LaTeX \end{flushright} -->
@@ -75,6 +75,9 @@ g(x,y) &=& x^3+y^3 \label{eqn:g}
 式(\ref{eqn:f})は、線形項のみであるが、
 式(\ref{eqn:g})は、非線形項がある。
 <!-- \ref は、LaTeX の命令です -->
+
+また、amsmathパッケージを使うと、
+$\frac{1}{2}$を$\dfrac{1}{2}$とすることができる。
 
 表は、以下のように
 markdownで書くことは可能ですが、

@@ -1,16 +1,23 @@
 #!/bin/sh
 #
-# umd2tex 2023.04.25 edit  by yuji katsuta
+# umd2tex 2023.06.25 edit  by yuji katsuta
 #
 
 if [ "$1" = "" ]
 then
 echo "usage : make from markdown to upLaTeX"
 echo "$0 filename : filename.md to filename.tex"
+echo "$0 -amsmath filename : usepackage amsmath"
 echo "$0 ptex filename : to pLaTeX"
 echo "$0 -makemain filename : to md2texmain.tex & filename.tex"
 echo "$0 -makemain ptex filename : to 2files(pLaTeX)"
 else
+
+if [ "$1" = "-amsmath" ]
+then
+AMSMATH=amsmath
+shift
+fi
 if [ "$1" = "-makemain" ]
 then
 MDMAIN=umd2texmain
@@ -32,6 +39,10 @@ shift
 echo  '\documentclass[a4paper,dvipdfmx]{jarticle}%' >> $MDMAIN.tex
 fi
 echo '\usepackage{ulem,longtable,booktabs}' >> $MDMAIN.tex
+if [ "$AMSMATH" = "amsmath" ]
+then
+echo '\usepackage{amsmath,amssymb}' >> $MDMAIN.tex
+fi
 echo '\usepackage{graphicx}' >> $MDMAIN.tex
 echo '\usepackage{hyperref}' >> $MDMAIN.tex
 echo '\usepackage{pxjahyper}' >> $MDMAIN.tex

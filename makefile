@@ -1,13 +1,13 @@
-##### makefile edit by yuji katsuta 2023.04.29
+##### makefile edit by yuji katsuta 2023.06.25
 ifndef PROG
 PROG = umd
 endif
 TOPDFX = latexmk -pdfdvi
 ifndef PLATEX
-MDTOTEX = umd2tex
+MDTOTEX = umd2tex -amsmath
 TOPDF = $(TOPDFX)
 else
-MDTOTEX = umd2tex -ptex
+MDTOTEX = umd2tex -amsmath -ptex
 TOPDF = $(TOPDFX) -latex=platex
 endif
 

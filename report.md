@@ -2,11 +2,11 @@
 LED点滅のタイマー割込み報告書
 <!-- LaTeX \end{center} -->
 <!-- LaTeX \begin{flushright} -->
-(Ver.0.1.0)  
+(Ver.0.1.1)  
 
 <!-- LaTeX \vspace{\fill} -->
 
-報告日2023年5月2日  
+報告日2023年6月25日  
 髙﨑　太郎
 <!-- LaTeX \end{flushright} -->
 
@@ -63,6 +63,10 @@ LED点滅のタイマー割込み報告書
 
 # 考察
 考察を記す。
+
+amsmathパッケージを使用すると、
+数式に$\frac{dx}{dt}$ではなく、
+$\dfrac{dx}{dt}$を使用することができる
 
 ## 謝辞
 謝辞を記す。

@@ -1,7 +1,7 @@
-##### makefile edit by yuji katsuta 2023.04.30
+##### makefile edit by yuji katsuta 2023.06.25
 PROG = report
 TOPDFX = latexmk -pdfdvi
-MDTOTEX = umd2tex
+MDTOTEX = umd2tex -amsmath
 TOPDF = $(TOPDFX)
 
 PU      = plantuml
@@ -33,5 +33,5 @@ TeX:
 clean:
 	$(RM) $(PROG).pdf $(PROG).tex $(PROG).dvi $(PROG).log \
 	$(PROG).out $(PROG).aux $(PROG).fls $(PROG).fdb_latexmk \
-	$(PROG).mk.pdf $(PROG).md.pdf 
+	$(PROG).mk.pdf $(PROG).md.pdf $(PROG).blg $(PROG).bbl
 

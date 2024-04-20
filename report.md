@@ -1,22 +1,32 @@
 <!-- LaTeX \begin{center}\huge -->
+<!-- 説明：センタリングの開始と大文字の指定 -->
 LED点滅のタイマー割込み報告書
 <!-- LaTeX \end{center} -->
+<!-- 説明：センタリング終了-->
 <!-- LaTeX \begin{flushright} -->
-(Ver.0.1.1)  
+<!-- 説明：右寄せ開始 -->
+(Ver.1.2.0)  
 
 <!-- LaTeX \vspace{\fill} -->
+<!-- 説明：縦方向の伸びる空白 -->
 
-報告日2023年6月25日  
+報告日2024年4月20日  
 髙﨑　太郎
+<!-- 説明：UTF-8の文字(髙﨑) -->
 <!-- LaTeX \end{flushright} -->
+<!-- 説明：右寄せ終了 -->
 
 <!-- LaTeX \thispagestyle{empty} -->
+<!-- 説明：このページのページ表示をしない -->
 <!-- LaTeX \clearpage -->
+<!-- 説明：改ページ -->
 
 # 実験方法
+<!-- 説明：section -->
 実験方法で、実験手順などを記す。
 
 ## 実験装置
+<!-- 説明：subsection -->
 実験装置や機器の接続を記す。
 
 ## 実験手順
@@ -30,14 +40,19 @@ LED点滅のタイマー割込み報告書
 ## 実験データ
 
 <!-- LaTeX \setfgsize{1.0} -->
+<!-- 説明：図の大きさの倍率 -->
 <!-- LaTeX \sethyocap{実験データ} -->
+<!-- 説明：表のタイトル -->
 @import "data/mode4.png"
+<!-- 説明：表(png)の取り込み -->
 
 表\ref{hyo:実験データ}は、実測値の表です。
+<!-- 説明：\ref{hyo:は、表のタイトルを参照 -->
 表中、第1列は目標値、第2列は理論値、第3列は実測値、第4列は誤差です。
 
 
 <!-- LaTeX \setfgsize{0.9} -->
+<!-- 説明：図の取り込み、[]内が図のタイトル、次行に空行が必要 -->
 ![mode4周期](data/mode4graph.png)
 
 図\ref{zu:mode4周期}は、周期の目標値に対する理論値と実測値の図です。
@@ -48,16 +63,20 @@ LED点滅のタイマー割込み報告書
 <!-- LaTeX \setfgsize{0.9} -->
 ![mode4誤差](data/mode4gosa.png)
 
-<!-- LaTeX \clearpage -->
-
 2軸グラフのサンプル(PWM制御)を以下に示す。
 
-<!-- LaTeX \setfgsize{0.7} -->
+<!-- LaTeX \begin{multicols}{2} -->
+<!-- 説明： 段組み開始 -->
+
+<!-- LaTeX \setfgsize{1.0} -->
 <!-- LaTeX \sethyocap{サンプル} -->
 @import "data/data.png"
 
-<!-- LaTeX \setfgsize{0.7} -->
+<!-- LaTeX \setfgsize{1.0} -->
 ![2軸](data/graph.png)
+
+<!-- LaTeX \end{multicols} -->
+<!-- 説明： 段組み終了 -->
 
 <!-- LaTeX \clearpage -->
 
@@ -84,7 +103,9 @@ $\dfrac{dx}{dt}$を使用することができる
 
 makefile である report.mk
 <!-- LaTeX \setpdfsize{0.75} -->
+<!-- 説明：pdfの大きさの倍率 -->
 <!-- LaTeX \setpdfm{1} -->
+<!-- 説明：取り込むのページ指定 -->
 @import "report.mk.pdf"
 <!-- 1ページのpdfファイル -->
 
@@ -94,11 +115,14 @@ makefile である report.mk
 <!-- LaTeX \setpdfsize{0.75} -->
 <!-- LaTeX \setpdfm{1} -->
 <!-- LaTeX \setpdfn{2} -->
+<!-- 説明：次ページ以降を指定すると最後のページまで表示 -->
 @import "report.md.pdf"
 <!-- 2ページ以上あるpdfファイル -->
 
 <!-- LaTeX \clearpage -->
 <!-- LaTeX \bibliographystyle{unsrt} -->
+<!-- 説明：指定順に参考文献を取り込む -->
 <!-- LaTeX \bibliography{ykarchive} -->
+<!-- 説明：参考文献ファイルの指定 -->
 
 <!-- file end -->
